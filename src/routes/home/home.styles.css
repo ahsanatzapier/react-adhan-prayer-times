@@ -1,0 +1,58 @@
+.svgFajr {
+  height: 48px;
+  width: 48px;
+  display: block;
+  margin: auto;
+  filter: invert(88%) sepia(22%) saturate(990%) hue-rotate(193deg)
+    brightness(95%) contrast(91%);
+}
+
+.svgSunrise {
+  height: 48px;
+  width: 48px;
+  display: block;
+  margin: auto;
+  filter: invert(90%) sepia(9%) saturate(1666%) hue-rotate(309deg)
+    brightness(95%) contrast(114%);
+}
+
+.svgDhuhr {
+  height: 48px;
+  width: 48px;
+  display: block;
+  margin: auto;
+  filter: invert(89%) sepia(11%) saturate(925%) hue-rotate(351deg)
+    brightness(104%) contrast(101%);
+}
+
+.svgAsr {
+  height: 48px;
+  width: 48px;
+  display: block;
+  margin: auto;
+  filter: invert(92%) sepia(2%) saturate(4954%) hue-rotate(334deg)
+    brightness(101%) contrast(101%);
+}
+
+.svgMaghrib {
+  height: 48px;
+  width: 48px;
+  display: block;
+  margin: auto;
+  filter: invert(80%) sepia(5%) saturate(1819%) hue-rotate(292deg)
+    brightness(102%) contrast(95%);
+}
+
+.svgIsha {
+  height: 48px;
+  width: 48px;
+  display: block;
+  margin: auto;
+  filter: invert(74%) sepia(65%) saturate(130%) hue-rotate(168deg)
+    brightness(102%) contrast(97%);
+}
+
+.table td,
+.table th {
+  padding: 0.1em;
+}
