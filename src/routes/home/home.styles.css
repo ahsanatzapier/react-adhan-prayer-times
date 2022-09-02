@@ -56,3 +56,20 @@
 .table th {
   padding: 0.1em;
 }
+
+.heroStyle {
+  height: 600px;
+  width: 600px;
+}
+
+.button.is-static {
+  background-color: maroon;
+  border-color: transparent;
+  color: #fff;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.oregano-font {
+  font-family: Oregano;
+}
