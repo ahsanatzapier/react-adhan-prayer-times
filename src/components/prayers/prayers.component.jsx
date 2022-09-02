@@ -8,6 +8,8 @@ import isha from "../../assets/isha.svg";
 import moment from "moment-timezone";
 
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { ComponentsContext } from "../../contexts/components.context";
 
 import {
   Coordinates,
@@ -18,9 +20,23 @@ import {
   Qibla,
 } from "adhan";
 
-const Prayers = ({ latitude, longitude }) => {
+const Prayers = ({ latitude, longitude, place }) => {
+  const {
+    setShowTitleComponent,
+    setShowImageComponent,
+    setShowSmallImageComponent,
+    setShowSearchComponent,
+    setShowLocationItemsComponent,
+  } = useContext(ComponentsContext);
+
+  setShowImageComponent(false);
+  setShowSearchComponent(false);
+  setShowTitleComponent(false);
+  setShowSmallImageComponent(true);
+  setShowLocationItemsComponent(false);
+
   const coordinates = new Coordinates(latitude, longitude);
-  // console.log(coordinates);
+  // console.log(place);
   const date = new Date();
   const params = CalculationMethod.MoonsightingCommittee();
 
@@ -69,11 +85,11 @@ const Prayers = ({ latitude, longitude }) => {
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-  useEffect(() => {
-    setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-  });
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setTimeLeft(calculateTimeLeft());
+  //   }, 1000);
+  // });
 
   function toTitleCase(str) {
     return str.replace(/\w\S*/g, function (txt) {
@@ -91,85 +107,101 @@ const Prayers = ({ latitude, longitude }) => {
     //         {timeLeft.seconds} Seconds
     //       </strong>
     //     </div>
-    <table className="table is-fullwidth has-background-black">
-      <tbody>
-        <tr>
-          <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
-            Fajr
-          </td>
-          <td className="has-text-centered is-borderless">
-            <img src={fajr} alt="" className="svgFajr" />
-          </td>
-          <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold">
-            {moment(prayerTimes.fajr).tz("America/Edmonton").format("h:mm A")}
-          </td>
-        </tr>
+    <div>
+      <span className="title is-2 has-text-danger">{place}</span>
+      <br></br>
+      <br></br>
 
-        <tr>
-          <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
-            Sunrise
-          </td>
-          <td className="has-text-centered is-borderless">
-            <img src={sunrise} alt="" className="svgSunrise" />
-          </td>
-          <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold">
-            {moment(prayerTimes.sunrise)
-              .tz("America/Edmonton")
-              .format("h:mm A")}
-          </td>
-        </tr>
+      <table className="table is-fullwidth has-background-black">
+        <tbody>
+          <tr>
+            <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
+              Fajr
+            </td>
+            <td className="has-text-centered is-borderless">
+              <img src={fajr} alt="" className="svgFajr" />
+            </td>
+            <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold">
+              {moment(prayerTimes.fajr).tz("America/Edmonton").format("h:mm A")}
+            </td>
+          </tr>
 
-        <tr>
-          <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
-            Dhuhr
-          </td>
-          <td className="has-text-centered is-borderless">
-            <img src={dhuhr} alt="" className="svgDhuhr" />
-          </td>
-          <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-medium">
-            {moment(prayerTimes.dhuhr).tz("America/Edmonton").format("h:mm A")}
-          </td>
-        </tr>
+          <tr>
+            <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
+              Sunrise
+            </td>
+            <td className="has-text-centered is-borderless">
+              <img src={sunrise} alt="" className="svgSunrise" />
+            </td>
+            <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold">
+              {moment(prayerTimes.sunrise)
+                .tz("America/Edmonton")
+                .format("h:mm A")}
+            </td>
+          </tr>
 
-        <tr>
-          <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
-            Asr
-          </td>
-          <td className="has-text-centered is-borderless">
-            <img src={asr} alt="" className="svgAsr" />
-          </td>
-          <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold">
-            {moment(prayerTimes.asr).tz("America/Edmonton").format("h:mm A")}
-          </td>
-        </tr>
+          <tr>
+            <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
+              Dhuhr
+            </td>
+            <td className="has-text-centered is-borderless">
+              <img src={dhuhr} alt="" className="svgDhuhr" />
+            </td>
+            <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-medium">
+              {moment(prayerTimes.dhuhr)
+                .tz("America/Edmonton")
+                .format("h:mm A")}
+            </td>
+          </tr>
 
-        <tr>
-          <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
-            Maghrib
-          </td>
-          <td className="has-text-centered is-borderless">
-            <img src={maghrib} alt="" className="svgMaghrib" />
-          </td>
-          <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold">
-            {moment(prayerTimes.maghrib)
-              .tz("America/Edmonton")
-              .format("h:mm A")}
-          </td>
-        </tr>
+          <tr>
+            <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
+              Asr
+            </td>
+            <td className="has-text-centered is-borderless">
+              <img src={asr} alt="" className="svgAsr" />
+            </td>
+            <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold">
+              {moment(prayerTimes.asr).tz("America/Edmonton").format("h:mm A")}
+            </td>
+          </tr>
 
-        <tr>
-          <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
-            Isha
-          </td>
-          <td className="has-text-centered is-borderless">
-            <img src={isha} alt="" className="svgIsha" />
-          </td>
-          <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold">
-            {moment(prayerTimes.isha).tz("America/Edmonton").format("h:mm A")}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <tr>
+            <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
+              Maghrib
+            </td>
+            <td className="has-text-centered is-borderless">
+              <img src={maghrib} alt="" className="svgMaghrib" />
+            </td>
+            <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold">
+              {moment(prayerTimes.maghrib)
+                .tz("America/Edmonton")
+                .format("h:mm A")}
+            </td>
+          </tr>
+
+          <tr>
+            <td className="has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold has-text-left">
+              Isha
+            </td>
+            <td className="has-text-centered is-borderless">
+              <img src={isha} alt="" className="svgIsha" />
+            </td>
+            <td className="has-text-right has-text-white is-vcentered is-borderless is-size-5 has-text-weight-semibold">
+              {moment(prayerTimes.isha).tz("America/Edmonton").format("h:mm A")}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button
+        className="button is-danger mb-2"
+        onClick={() => {
+          window.location.reload();
+        }}
+      >
+        RESET
+      </button>
+    </div>
   );
 };
 

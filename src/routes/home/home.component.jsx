@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import "./home.styles.css";
 import LocationsResult from "../../components/locations-result/locations-result.component";
+import Search from "../../components/search/search.component";
+import Title from "../../components/title/title.component";
 
-import prayerImage from "../../assets/prayer.svg";
+import { useContext } from "react";
+import { ComponentsContext } from "../../contexts/components.context";
+
+import Image from "../../components/image/image.component";
+import SmallImage from "../../components/image/smallimage.component";
 
 const defaultFromFields = {
   search: "",
@@ -12,7 +18,20 @@ const Home = () => {
   const [locations, setLocations] = useState([]);
   const [formFields, setFormFields] = useState(defaultFromFields);
   const [searchString, setSearchString] = useState("");
+  const [searchUpdated, setSearchUpdated] = useState(false);
   const { search } = formFields;
+  const {
+    showTitleComponent,
+    setShowTitleComponent,
+    showImageComponent,
+    setShowImageComponent,
+    showSmallImageComponent,
+    setShowSmallImageComponent,
+    showSearchComponent,
+    setShowSearchComponent,
+    showLocationResultsComponent,
+    setShowLocationResultsComponent,
+  } = useContext(ComponentsContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,49 +55,45 @@ const Home = () => {
       .then((response) => response.json())
       .then((locations) => {
         setLocations(locations.features);
+        setSearchUpdated(true);
       })
       .catch(() => {
         console.log("Unable to fetch locations");
       });
   }, [searchString]);
 
+  setShowSearchComponent(true);
+  setShowTitleComponent(true);
+  setShowImageComponent(true);
+  setShowLocationResultsComponent(true);
+
+  console.log("Checking for location when page loads", locations);
+  console.log(searchUpdated);
+
   return (
     <section className="section hero is-black is-fullheight">
       <div className="hero-body ">
         <div className="container">
           <div className="columns is-vcentered is-centered">
-            <div className="column is-narrow  is-one-third has-background-black">
-              <div className="title is-1 has-text-centered">Prayer Times</div>
-              <img src={prayerImage} className="mb-4" />
-              <form onSubmit={handleSubmit}>
-                <div className="field has-addons ">
-                  <p class="control">
-                    <a class="button is-static">Location</a>
-                  </p>
+            <div className="column is-narrow  is-one-third has-background-black has-text-centered">
+              {showTitleComponent && <Title />}
 
-                  <div className="control is-expanded">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="ex. Vancouver"
-                      onChange={handleChange}
-                      name="search"
-                      value={search}
-                      required
-                    />
-                  </div>
+              {showImageComponent && <Image />}
+              {showSmallImageComponent && <SmallImage />}
 
-                  <div className="control">
-                    <button type="submit" className="button is-link">
-                      Search
-                    </button>
-                  </div>
-                </div>
-              </form>
+              {showSearchComponent && (
+                <Search
+                  submitHandler={handleSubmit}
+                  changeHandler={handleChange}
+                  search={search}
+                />
+              )}
 
               <br></br>
 
-              <LocationsResult locations={locations} />
+              {showLocationResultsComponent && (
+                <LocationsResult locations={locations} />
+              )}
             </div>
           </div>
         </div>
