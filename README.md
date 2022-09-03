@@ -1,6 +1,20 @@
-# Getting Started with Create React App
+# Live Demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://adhan.netlify.app/
+
+# What is Adhan Prayer Times ?
+
+![](https://github.com/ahsanatzapier/react-adhan-prayer-times/blob/main/src/assets/smallprayer.svg)
+
+Adhan Prayer Times is an app to find the most accurate Islamic Prayer times for anywhere in the world. It uses React for UI and is hosted on Netlify. The app takes the user's location text, presents matching locations, and converts the selected location to geographic coordinates using Mapbox's forward geocoding API. The coordinates are then used in Adhan JavaScript, a high-precision prayer time library, to calculate the prayer times and present them to the user beautifully and cleanly.
+
+# Preview
+
+![](https://cdn.zappy.app/0b40bd637edcd65ed9bae52e5d9fa1d3.png)
+
+![](https://cdn.zappy.app/db410fabe70d43a314380f6562c91777.png)
+
+![](https://cdn.zappy.app/5a4889bae6f2d1488965356de5252822.png)
 
 ## Available Scripts
 

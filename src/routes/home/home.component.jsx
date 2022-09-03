@@ -75,7 +75,7 @@ const Home = () => {
       <div className="hero-body ">
         <div className="container">
           <div className="columns is-vcentered is-centered">
-            <div className="column is-narrow  is-one-third has-background-black has-text-centered">
+            <div className="column is-narrow is-half has-background-black has-text-centered">
               {showTitleComponent && <Title />}
 
               {showImageComponent && <Image />}
